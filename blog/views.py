@@ -4,15 +4,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def home(request):
-    print('request.get_full_path() = ',request.get_full_path)
-    print('request.method = ',request.method)
-    response = HttpResponse('Blog home')
-    if request.method == 'POST':
-        print('name', request.POST.get('name'))
-        print('password:', request.POST.get('password'))
-    return render(request, 'blog/home.html')
-
-def request_info_view(request):
     print("=== HttpRequest Information ===")
     print(f"Method: {request.method}")
     print(f"Path: {request.path}")
@@ -27,5 +18,11 @@ def request_info_view(request):
     print(f"Headers:")
     for header, value in request.headers.items():
         print(f"  {header}: {value}")
-    return HttpResponse("HttpRequest information printed to console.")
+    response = HttpResponse('Blog home')
+    if request.method == 'POST':
+        print('name', request.POST.get('name'))
+        print('password:', request.POST.get('password'))
+        name = request.POST.get('name')
+        return HttpResponse(f'Hello,{name}')
+    return render(request, 'blog/home.html')
 
