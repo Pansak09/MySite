@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import myapp
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('window.urls')),  # route หน้าแรกไปที่ window
+    path("", include('myapp.urls')), # route หน้าแรกไปที่ window
+    path("blog/", include('blog.urls')),
 ]
